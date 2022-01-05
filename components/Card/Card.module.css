@@ -1,0 +1,57 @@
+.card__container {
+  width: 500px;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 15px;
+  border-radius: 20px;
+  margin: 20px;
+}
+
+.card__name {
+  width: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.card__copyright {
+  width: 100%;
+  margin-bottom: 20px;
+  opacity: 0.5;
+  font-size: 18px;
+}
+
+.card__img {
+  width: 100%;
+  height: auto;
+  border: 5px solid black;
+}
+
+.card__title {
+  width: 100%;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.card__description {
+  font-size: 17px;
+}
+
+.card__reactions__container {
+  display: flex;
+  width: 20%;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.card__date {
+  font-size: 18px;
+  opacity: 0.8;
+  margin-top: 10px;
+}
