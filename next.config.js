@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  reactStrictMode: true,
     env : {
-        FONT_KEY: "db7d848cfd"
+        API_KEY: "RveS64yeD5xN3vBECRaR6KxmzSbXe7qR1gVDmFX4"
     }
 }
 

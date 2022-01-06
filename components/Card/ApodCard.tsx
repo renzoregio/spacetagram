@@ -1,8 +1,7 @@
 import s from "./Card.module.css"
-import { useState } from "react";
 
 
-interface CardDetails {
+interface ApodCardDetails {
     title: string,
     date: string,
     img: string,
@@ -16,16 +15,15 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
 
 
-const Card = ({ title, date, img, explanation } : CardDetails ) => {
+const Card = ({ title, date, img, explanation } : ApodCardDetails ) => {
   
     return (
         <div className={s.card__container}>
             <span className={s.card__name}>Spacetagram</span>
-            <span className={s.card__copyright}>Brought to you by NASA's</span>
+            <span className={s.card__copyright}>Brought to you by NASA's Astronomy Photo of the Day API</span>
             <img src={img} alt={title} className={s.card__img}/>
-            <span className={s.card__title}>{title}</span>
-            <span className={s.card__date}>{date}</span>
-            {/* <p className={s.card__description}>{explanation}</p> */}
+            <span className={s.card__title}>{`${title} - ${date}`}</span>
+            <p className={s.card__description}>{explanation}</p>
             <div className={s.card__reactions__container}>
                 <FontAwesomeIcon icon={faHeart} />
                 <span>0</span>

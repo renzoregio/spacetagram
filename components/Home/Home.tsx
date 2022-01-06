@@ -1,12 +1,15 @@
 import s from "./Home.module.css";
 import { Header } from "../Header"
-import { Cards } from "../Cards"
+import { Categories} from "../Categories"
+
+
 
 const Home = () => {
+    
     return (
         <div className={s.container}>
             <Header />
-            <Cards />
+            <Categories />
         </div>
     )
 }
