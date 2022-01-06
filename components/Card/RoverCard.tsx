@@ -1,4 +1,5 @@
 import s from "./Card.module.css"
+import icons from "../../icons"
 
 
 interface RoverCardDetails {
@@ -7,11 +8,7 @@ interface RoverCardDetails {
     img: string,
 }
 
-import { faHeart } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import '@fortawesome/fontawesome-svg-core/styles.css';
-import { config } from '@fortawesome/fontawesome-svg-core';
-config.autoAddCss = false;
+
 
 
 const Card = ({ title, date, img } : RoverCardDetails ) => {
@@ -25,7 +22,7 @@ const Card = ({ title, date, img } : RoverCardDetails ) => {
             <span className={s.card__date}>{date}</span>
             {/* <p className={s.card__description}>{explanation}</p> */}
             <div className={s.card__reactions__container}>
-                <FontAwesomeIcon icon={faHeart} />
+                <div> {icons.like} </div>
                 <span>0</span>
             </div>
         </div>

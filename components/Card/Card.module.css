@@ -1,4 +1,16 @@
+@keyframes opacityEffect {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+    opacity: 100;
+  }
+}
+
 .card__container {
+  animation: opacityEffect 0.8s ease-in-out forwards;
   width: 600px;
   background-color: whitesmoke;
   display: flex;
