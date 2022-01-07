@@ -1,3 +1,4 @@
+import { useState } from "react"
 import s from "./Card.module.css"
 import icons from "../../icons"
 
@@ -12,7 +13,12 @@ interface RoverCardDetails {
 
 
 const Card = ({ title, date, img } : RoverCardDetails ) => {
-  
+    const [likeCount, setLikeCount] = useState(0)
+
+    const likePost = () : void => {
+        setLikeCount(likeCount + 1)
+    }
+
     return (
         <div className={s.card__container}>
             <span className={s.card__name}>Spacetagram</span>
@@ -20,10 +26,9 @@ const Card = ({ title, date, img } : RoverCardDetails ) => {
             <img src={img} alt={title} className={s.card__img}/>
             <span className={s.card__title}>{title}</span>
             <span className={s.card__date}>{date}</span>
-            {/* <p className={s.card__description}>{explanation}</p> */}
             <div className={s.card__reactions__container}>
-                <div> {icons.like} </div>
-                <span>0</span>
+                <div onClick={likePost} className={s.card__like__container}> {icons.like} </div>
+                <span>{likeCount}</span>
             </div>
         </div>
     )

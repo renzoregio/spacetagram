@@ -18,7 +18,6 @@ interface RoverObj {
     name: string
 }
 
-
 interface IApodData {
     date: string,
     explanation: string,
@@ -30,22 +29,13 @@ const Cards = ({ category } : any )  => {
 
     const [roverData, setRoverData] = useState([])
     const [currentRoverPage, setCurrentRoverPage] = useState(1)
-    const [loadPage, setLoadPage] = useState(false)
-    const [apodData, setApodData] = useState({
-        date: "",
-        explanation: "",
-        hdurl: "",
-        title: "",
-        url: ""
-    })
-
+    
     useEffect(() => {
-        category === "mars-rover" ? getRover() : getApod()
+        category && getRover();
     }, [category])
 
     
     const getRover = async(pageNum : number = 1) => {
-        window.scrollTo(800, 800)    
         setTimeout(async () => {
             const res = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=${pageNum}&api_key=${process.env.API_KEY}`)
             const data = await res.json()
@@ -53,34 +43,29 @@ const Cards = ({ category } : any )  => {
             if(pageNum >= 1){
                 setCurrentRoverPage(pageNum)
             }
-        }, 500)
+        }, 100)
+        setTimeout(() => window.scrollTo(1700, 1700), 1000)
     } 
 
-    const getApod = async() => {
-        const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}`)
-        const data: IApodData = await res.json();
-        setApodData(data)
-    }
-
+    
     return(
         <div className={s.container}>
+            
         <div className={s.cards__container}>
 
-            {category === "mars-rover" ? 
+            {category === "mars-rover" &&
                 roverData.map((data: RoverApiResult) => (
                     <RoverCard key={data.id} title={`${data.rover.name} Rover - ${data.camera.full_name}`} date={data.earth_date} img={data.img_src}/>
                 ))
-                :
-                <ApodCard title={apodData.title} date={apodData.date} explanation={apodData.explanation} img={apodData.hdurl}/>        
             }
 
         </div>
-
 
         { category === "mars-rover" && 
             currentRoverPage >= 1 &&
                 <div className={s.pagination__container}>
                     { currentRoverPage > 1 && <div className={s.pagination__btn} onClick={() => getRover(currentRoverPage - 1)}> {icons.previous} </div>}
+                    { currentRoverPage > 1 && roverData.length === 25 && <span className={s.pagination__count}>{currentRoverPage}</span>}
                     { roverData.length === 25 && <div className={s.pagination__btn} onClick={() => getRover(currentRoverPage + 1)}> {icons.next} </div> }
                 </div>
         }

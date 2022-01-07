@@ -4,13 +4,12 @@ import { useState } from "react"
 
 
 const Categories = () => {
-    const [category, setCategory] = useState("apod")
+    const [category, setCategory] = useState("")
 
     return (
         <>
             <div className={s.categories__container}>
-                <button onClick={() => setCategory("mars-rover")} className={category == "apod" ? s.category__btn__unselected : s.category__btn__selected}>Mars Rover Photos</button>
-                <button onClick={() => setCategory("apod")} className={category == "mars-rover" ? s.category__btn__unselected : s.category__btn__selected}>Astronomy Picture of the Day</button>
+                <button onClick={() => setCategory("mars-rover")} className={category == "apod" || category == "" ? s.category__btn__unselected : s.category__btn__selected}>See Mars Rover Photos</button>
             </div>
             <Cards category={category} />
         </>
