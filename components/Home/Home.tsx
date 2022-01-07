@@ -32,6 +32,7 @@ const Home = () => {
     return (
         <div className={s.container}>
             <Header />
+            
             <div className={s.apod__container}>
                 <h1 className={s.apod__headline}>Astronomy Photo of the Day (APOD)</h1>
                 <div className={s.apod__details__container}>

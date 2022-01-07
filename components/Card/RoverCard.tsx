@@ -1,6 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import s from "./Card.module.css"
 import icons from "../../icons"
+import { useSession} from "next-auth/react"
+import { SignIn } from "../SignIn"
 
 
 interface RoverCardDetails {
@@ -10,13 +12,18 @@ interface RoverCardDetails {
 }
 
 
-
-
 const Card = ({ title, date, img } : RoverCardDetails ) => {
+    const { data: session } = useSession();
     const [likeCount, setLikeCount] = useState(0)
+    const [displaySignInModal, setDisplaySignInModal] = useState(false)
+
 
     const likePost = () : void => {
-        setLikeCount(likeCount + 1)
+        if(session){
+            setLikeCount(likeCount + 1)
+        } else {
+            setDisplaySignInModal(true)
+        }
     }
 
     return (
@@ -30,6 +37,7 @@ const Card = ({ title, date, img } : RoverCardDetails ) => {
                 <div onClick={likePost} className={s.card__like__container}> {icons.like} </div>
                 <span>{likeCount}</span>
             </div>
+            { displaySignInModal && <SignIn />}
         </div>
     )
 }
