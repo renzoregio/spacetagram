@@ -5,7 +5,6 @@ import Link from "next/link"
 import { Home } from "../components/Home"
 
 const Page: NextPage = () => {
-  
   return (
     <div className={styles.container}>
       <Head>
