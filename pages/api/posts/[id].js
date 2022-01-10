@@ -9,7 +9,7 @@ export default async (req, res) => {
     switch(method){
         case "GET":
             try {
-                const foundPost = await Post.findOne({field: { id: id}})
+                const foundPost = await Post.findOne({ id: id })
                 if(!foundPost){
                     return res.status(400).json({ success: false })
                 }
@@ -20,12 +20,13 @@ export default async (req, res) => {
             break;
         case "PUT":
             try {
-                const foundPost = await Post.findOneAndUpdate({field: {id: id}}, req.body, {
+                const foundPost = await Post.findOneAndUpdate({id: id}, req.body, {
                     new: true,
                     runValidators: true
                 })
+                console.log(foundPost)
                 if(!foundPost){
-                    return res.status(400).json({ success: false })
+                    res.status(400).json({ success: false })
                 }
                 res.status(200).json({ success: true, data: foundPost })
             } catch (err) {

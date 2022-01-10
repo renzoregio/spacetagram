@@ -1,33 +1,13 @@
 import s from "./Cards.module.css"
-import { RoverCard, ApodCard } from "../Card"
+import { RoverCard } from "../Card"
 import { useEffect, useState } from "react"
 import icons from "../../icons"
-interface RoverApiResult {
-    id: number,
-    camera: RoverCamera,
-    img_src: string,
-    rover: RoverObj,
-    earth_date: string,
-}
+import { RoverApiResult } from "../../Interfaces"
 
-interface RoverCamera {
-    full_name: string
-}
 
-interface RoverObj {
-    name: string
-}
-
-interface IApodData {
-    date: string,
-    explanation: string,
-    hdurl: string,
-    title: string,
-    url: string
-}
 const Cards = ({ category } : any )  => {
 
-    const [roverData, setRoverData] = useState([])
+    const [roverData, setRoverData] = useState<RoverApiResult[]>([])
     const [currentRoverPage, setCurrentRoverPage] = useState(1)
     
     useEffect(() => {
@@ -35,11 +15,12 @@ const Cards = ({ category } : any )  => {
     }, [category])
 
     
-    const getRover = async(pageNum : number = 1) => {
+    const getRover = async(pageNum : number = 1) : Promise<void> => {
         setTimeout(async () => {
             const res = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=${pageNum}&api_key=${process.env.API_KEY}`)
             const data = await res.json()
             setRoverData(data.photos) 
+            console.log(data.photos)
             if(pageNum >= 1){
                 setCurrentRoverPage(pageNum)
             }
@@ -54,8 +35,8 @@ const Cards = ({ category } : any )  => {
         <div className={s.cards__container}>
 
             {category === "mars-rover" &&
-                roverData.map((data: RoverApiResult) => (
-                    <RoverCard key={data.id} title={`${data.rover.name} Rover - ${data.camera.full_name}`} date={data.earth_date} img={data.img_src}/>
+                roverData.map((data) => (
+                    <RoverCard key={data.id} id={data.id} title={`${data.rover.name} Rover - ${data.camera.full_name}`} date={data.earth_date} img={data.img_src}/>
                 ))
             }
 

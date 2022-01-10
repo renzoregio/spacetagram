@@ -71,10 +71,13 @@
 
 .card__like__container {
   transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.card__is__liked {
+  color: red;
 }
 
 .card__like__container:hover {
-  color: red;
-  cursor: pointer;
   transform: scale(1.3);
 }
