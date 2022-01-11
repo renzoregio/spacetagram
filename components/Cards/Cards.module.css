@@ -40,3 +40,9 @@
   font-weight: bold;
   font-size: 30px;
 }
+
+@media (max-width: 1024px) {
+  .cards__container {
+    justify-content: center;
+  }
+}
