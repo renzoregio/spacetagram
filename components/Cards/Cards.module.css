@@ -41,6 +41,12 @@
   font-size: 30px;
 }
 
+@media (min-width: 1025px) and (max-width: 1099px) {
+  .cards__container {
+    justify-content: center;
+    align-items: center;
+  }
+}
 @media (max-width: 1024px) {
   .cards__container {
     justify-content: center;

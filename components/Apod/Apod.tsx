@@ -80,14 +80,14 @@ const Apod = () => {
         const data = await res.json();
         setApodData(data)
         setIsLoading(false)
-        const retrievedData = await fetch(`http://localhost:3000/api/posts/${data.date}`);
+        const retrievedData = await fetch(`https://spacetagram-six.vercel.app/api/posts/${data.date}`);
         if(retrievedData.status === 200){
             const foundPost = await retrievedData.json();
             const users = foundPost.data.likedBy;
             setLikeCount(foundPost.data.likeCount);
             setLikedByUsers(users);
         } else {
-            await fetch("http://localhost:3000/api/posts", {
+            await fetch("https://spacetagram-six.vercel.app/api/posts", {
                 method: "POST",
                 headers: {
                     "Accept": "application/json", 
@@ -96,6 +96,7 @@ const Apod = () => {
                 body: JSON.stringify({ id: data.date })
             })
         }
+        console.log(apodData.hdurl)
     }
     
     return (
@@ -113,7 +114,7 @@ const Apod = () => {
                     <iframe className={s.apod__img} src={apodData.url}>
                     </iframe>
                 :
-                    <img src={apodData.hdurl} className={s.apod__img}/>
+                    <img src={apodData.hdurl || apodData.url} alt={apodData.title} className={s.apod__img}/>
                 }
                 <div className={s.apod__like__container}>
                     <span className={s.apod__like__count}>{likeCount}</span>

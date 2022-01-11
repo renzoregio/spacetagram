@@ -14,7 +14,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: auto;
+  width: 50%;
 }
 
 .loading__dot {

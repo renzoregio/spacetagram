@@ -3,7 +3,7 @@ import Post from "../../../models/Post";
 
 dbConnect();
 
-export default async(req, res) => {
+const retrieveData =  async(req, res) => {
     const { method } = req;
 
     switch(method){
@@ -25,5 +25,8 @@ export default async(req, res) => {
             break;
         default:
             res.status(400).json({ success: false})
+            break;
     }
 }
+
+export default retrieveData;

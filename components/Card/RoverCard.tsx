@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Image from 'next/image'
 import s from "./Card.module.css"
 import icons from "../../icons"
 import { useSession} from "next-auth/react"
@@ -19,10 +20,10 @@ const Card = ({ title, date, img, id } : RoverCardDetails ) => {
 
     const getRoverData = async() : Promise<void> => {
         try {
-            const res = await fetch(`http://localhost:3000/api/posts/${id}-${date}`)
+            const res = await fetch(`https://spacetagram-six.vercel.app/api/posts/${id}-${date}`)
             if(res.status === 400){
                 const postId = `${id}-${date}`
-                await fetch("http://localhost:3000/api/posts", {
+                await fetch("https://spacetagram-six.vercel.app/api/posts", {
                     method: "POST",
                     headers: {
                         "Accept": "application/json", 
@@ -52,7 +53,7 @@ const Card = ({ title, date, img, id } : RoverCardDetails ) => {
         if(session){
             setLikeCount(likeCount + 1)
             setLiked(true)
-            await fetch(`http://localhost:3000/api/posts/${id}-${date}`, {
+            await fetch(`https://spacetagram-six.vercel.app/api/posts/${id}-${date}`, {
                 method: "PUT",
                 headers: {
                     "Accept": "application/json", "Content-Type": "application/json",
@@ -68,7 +69,7 @@ const Card = ({ title, date, img, id } : RoverCardDetails ) => {
         setLikeCount(likeCount - 1)
         setLiked(false)
         const users = likedByUsers.filter(arr => arr.username !== session!.user!.name);
-        await fetch(`http://localhost:3000/api/posts/${id}-${date}`, {
+        await fetch(`https://spacetagram-six.vercel.app/api/posts/${id}-${date}`, {
             method: "PUT",
             headers: {
                 "Accept": "application/json", "Content-Type": "application/json",
@@ -80,8 +81,8 @@ const Card = ({ title, date, img, id } : RoverCardDetails ) => {
     return (
         <div className={s.card__container}>
             <span className={s.card__name}>Spacetagram</span>
-            <span className={s.card__copyright}>Brought to you by NASA's Mars Rover Photos API</span>
-            <img src={img} alt={title} className={s.card__img}/>
+            <span className={s.card__copyright}>Brought to you by NASA&apos;s Mars Rover Photos API</span>
+            <Image height="500" width="500" src={img} alt={title} className={s.card__img}/>
             <span className={s.card__title}>{title}</span>
             <span className={s.card__date}>{date}</span>
             <div className={s.card__reactions__container}>
