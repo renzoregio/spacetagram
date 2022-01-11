@@ -1,0 +1,39 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  50% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
+}
+
+.loading__dot__container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: auto;
+}
+
+.loading__dot {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(
+    45deg,
+    rgba(27, 24, 31, 1) 21.2%,
+    rgba(50, 4, 89, 1) 84.8%
+  );
+  animation: fadeIn 2.5s ease-in-out infinite;
+}
+
+.loading__dot:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.loading__dot:last-child {
+  animation-delay: 0.8s;
+  margin-right: 0px;
+}

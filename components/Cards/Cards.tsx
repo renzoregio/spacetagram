@@ -20,7 +20,6 @@ const Cards = ({ positionY } : {positionY : number} )  => {
             const res = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=${pageNum}&api_key=${process.env.API_KEY}`)
             const data = await res.json()
             setRoverData(data.photos) 
-            console.log(data.photos)
             if(pageNum >= 1){
                 setCurrentRoverPage(pageNum)
             }

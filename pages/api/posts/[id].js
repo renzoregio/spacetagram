@@ -24,7 +24,6 @@ export default async (req, res) => {
                     new: true,
                     runValidators: true
                 })
-                console.log(foundPost)
                 if(!foundPost){
                     res.status(400).json({ success: false })
                 }

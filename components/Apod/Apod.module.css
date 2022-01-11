@@ -105,6 +105,14 @@
   animation: heartbeatEffect 2s linear infinite;
 }
 
+.remove__display {
+  display: none;
+}
+
+.filler {
+  height: 700px;
+}
+
 @media (min-width: 701px) {
   .apod__details__container {
     flex-direction: row;

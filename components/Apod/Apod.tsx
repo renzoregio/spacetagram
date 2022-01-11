@@ -2,8 +2,9 @@ import s from "./Apod.module.css"
 import { useEffect, useState } from "react"
 import { useSession} from "next-auth/react"
 import { SignIn } from "../SignIn"
-import icons from "../../icons"
 import { LikedUsers, ApodCardDetails } from "../../Interfaces"
+import { Loading } from "../Loading"
+import icons from "../../icons"
 
 const Apod = () => {
     const { data: session } = useSession();
@@ -17,12 +18,13 @@ const Apod = () => {
         explanation: "",
         hdurl: "",
         title: "",
+        media_type: "",
+        url: ""
     })
 
     const checkLikeStatus = async() : Promise<void> => {
         const res = await fetch(`http://localhost:3000/api/posts/${apodData.date}`);
         const {data} = await res.json();
-        console.log(data)
         if(data && data.likedBy){
             const users = data.likedBy;
             for(let i = 0; i < users.length; i++){
@@ -79,10 +81,8 @@ const Apod = () => {
         setApodData(data)
         setIsLoading(false)
         const retrievedData = await fetch(`http://localhost:3000/api/posts/${data.date}`);
-        console.log(retrievedData)
         if(retrievedData.status === 200){
             const foundPost = await retrievedData.json();
-            console.log(foundPost)
             const users = foundPost.data.likedBy;
             setLikeCount(foundPost.data.likeCount);
             setLikedByUsers(users);
@@ -102,21 +102,27 @@ const Apod = () => {
         <div className={s.apod__container}>
             <h1 className={s.apod__headline}>Astronomy Photo of the Day (APOD)</h1>
            { isLoading ? 
-            <h1>Loading...</h1>
+            <Loading />
             :
 
             <div className={s.apod__details__container}>
             { displaySignInModal ? <SignIn /> 
             :
             <div className={s.apod__img__container}>
-                <img src={apodData.hdurl} className={s.apod__img}/>
+                { apodData.media_type == "video" ? 
+                    <iframe className={s.apod__img} src={apodData.url}>
+                    </iframe>
+                :
+                    <img src={apodData.hdurl} className={s.apod__img}/>
+                }
                 <div className={s.apod__like__container}>
                     <span className={s.apod__like__count}>{likeCount}</span>
                     <span className={likeCount > 0 ? s.apod__img__heart : ""}>{ icons.like }</span>
                 </div>
             </div>
             }
-            <div className={s.apod__text__container}>
+            { displaySignInModal && <div className={s.filler}></div>}
+            <div className={displaySignInModal ? s.remove__display :  s.apod__text__container}>
                 <h2>{apodData.title}</h2>
                 <span>{apodData.date}</span>
                 <p>{apodData.explanation}</p>

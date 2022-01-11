@@ -8,7 +8,9 @@ export interface ApodCardDetails {
     title: string,
     date: string,
     hdurl: string,
-    explanation: string
+    explanation: string,
+    media_type: string,
+    url: string
 }
 
 
