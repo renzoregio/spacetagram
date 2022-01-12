@@ -23,7 +23,7 @@ const Apod = () => {
     })
 
     const checkLikeStatus = async() : Promise<void> => {
-        const res = await fetch(`http://localhost:3000/api/posts/${apodData.date}`);
+        const res = await fetch(`https://spacetagram-six.vercel.app/api/posts/${apodData.date}`);
         const {data} = await res.json();
         if(data && data.likedBy){
             const users = data.likedBy;
@@ -44,7 +44,7 @@ const Apod = () => {
         setLikeCount(likeCount - 1)
         setLiked(false)
         const users = likedByUsers.filter(arr => arr.username !== session!.user!.name);
-        await fetch(`http://localhost:3000/api/posts/${apodData.date}`, {
+        await fetch(`https://spacetagram-six.vercel.app/api/posts/${apodData.date}`, {
             method: "PUT",
             headers: {
                 "Accept": "application/json", "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const Apod = () => {
         if(session){
             setLikeCount(likeCount + 1)
             setLiked(true)
-            await fetch(`http://localhost:3000/api/posts/${apodData.date}`, {
+            await fetch(`https://spacetagram-six.vercel.app/api/posts/${apodData.date}`, {
             method: "PUT",
             headers: {
                 "Accept": "application/json", "Content-Type": "application/json",
@@ -96,7 +96,6 @@ const Apod = () => {
                 body: JSON.stringify({ id: data.date })
             })
         }
-        console.log(apodData.hdurl)
     }
     
     return (
